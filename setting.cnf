@@ -1,0 +1,65 @@
+#!/bin/bash
+
+########################################
+#DIR
+DIR_ROOT_CA=rootCA
+DIR_INTER_CA=interCA
+DIR_SERVER=server
+DIR_CLIENT=client
+
+#----------------------------------------
+#RootCA
+CERT_ROOT_CA=RootCa$(date +%y%m%d).crt
+PRIVATE_KEY_ROOT_CA=RootCa$(date +%y%m%d).key
+CRL_ROOT_CA=RootCa$(date +%y%m%d).crl
+DAYS_ROOT_CA=$((365*10))
+SUBJ_ROOT_CA=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyRootCa$(date +%y%m%d)
+CRL_DAYS_ROOT_CA=$((365*10))
+PASS_PRIVATE_ROOT_CA=PassRootCa
+
+#InterCA
+CSR_INTER_CA=InterCa$(date +%y%m%d).csr
+CERT_INTER_CA=InterCa$(date +%y%m%d).crt
+PRIVATE_KEY_INTER_CA=InterCa$(date +%y%m%d).key
+CRL_INTER_CA=InterCa$(date +%y%m%d).crl
+DAYS_INTER_CA=$((365*10))
+SUBJ_INTER_CA=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyInterCa$(date +%y%m%d)
+CRL_DAYS_INTER_CA=$((365*10))
+PASS_PRIVATE_INTER_CA=PassInterCa
+
+#Server
+CSR_SERVER=Server$(date +%y%m%d).csr
+CERT_SERVER=Server$(date +%y%m%d).crt
+PRIVATE_KEY_SERVER=Server$(date +%y%m%d).key
+DAYS_SERVER=$((365*10))
+SUBJ_SERVER=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=www.MyCorp.ltd
+PASS_PRIVATE_SERVER=PassServer
+NO_PASS_PRIVATE_KEY=Server$(date +%y%m%d).nopass.key
+
+#Client
+PKCS12_CLIENT=Client$(date +%y%m%d).p12
+CSR_CLIENT=Client$(date +%y%m%d).csr
+CERT_CLIENT=Client$(date +%y%m%d).crt
+PRIVATE_KEY_CLIENT=Client$(date +%y%m%d).key
+DAYS_CLIENT=$((365*1))
+SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyClient$(date +%y%m%d)
+PASS_PRIVATE_CLIENT=PassClient
+PKCS12_NAME_CLIENT=MyClient$(date +%y%m%d)
+JOINED_CERT_FILE=Client$(date +%y%m%d).crt
+
+########################################
+
+#sub dir
+DIR_CERT=cert
+DIR_CRL=crl
+DIR_CSR=csr
+DIR_PRIVATE=private
+DIR_NEWRCERT=newcerts
+DIR_DIST=dist
+DIR_PKCS12=pkcs12
+
+#sub dir for CA
+DIRS_CA="${DIR_CERT} ${DIR_CRL} ${DIR_CSR} ${DIR_PRIVATE} ${DIR_NEWRCERT}"
+
+#sub dir for user
+DIRS_USER="${DIR_CERT} ${DIR_CSR} ${DIR_PKCS12} ${DIR_PRIVATE} ${DIR_DIST}"

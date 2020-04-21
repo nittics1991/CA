@@ -1,0 +1,10 @@
+<VirtualHost *:443>
+
+SSLVerifyClient require
+SSLVerifyDepth 1
+
+SSLRequire %{SSL_CLIENT_S_DN_CN}% =~ "MyClient" \
+    and %{SSL_CLIENT_S_DN_O}% eq "IT"
+    and %{SSL_CLIENT_S_DN_O}% eq "MyCorp.LTD"
+
+</VirtualHost>
