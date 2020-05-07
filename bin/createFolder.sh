@@ -40,17 +40,17 @@ do
     chmod 750 "${TARGET_PATH}/private"
     
     #openssl.cnf作成
-    cp /etc/ssl/openssl.cnf "${TARGET_PATH}/"
+    cp ./openssl.cnf "${TARGET_PATH}/"
     
     sed -i -r -e "s/^dir\s.+/dir=.\/${TARGET_PATH}/" "${TARGET_PATH}/openssl.cnf"
 done
 
 #config server
 
-cat << EOT >> "${DIR_SERVER}/openssl.cnf"
+cat << EOT >> "${DIR_INTER_CA}/openssl.cnf"
 
 #--------------------------------------------------
-[my_server]
+[server_cert]
 
 basicConstraints=CA:FALSE
 keyUsage=digitalSignature,keyEncipherment
@@ -62,10 +62,10 @@ EOT
 
 #config client
 
-cat << EOT >> "${DIR_CLIENT}/openssl.cnf"
+cat << EOT >> "${DIR_INTER_CA}/openssl.cnf"
 
 #--------------------------------------------------
-[my_client]
+[client_cert]
 
 basicConstraints=CA:FALSE
 keyUsage=digitalSignature,keyEncipherment

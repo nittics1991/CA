@@ -44,7 +44,7 @@ openssl ca \
     -cert "${DIR_INTER_CA}/${DIR_CERT}/${NEWEST_CERT_INTER_CA}" \
     -days "${DAYS_SERVER}" \
     -subj "${SUBJ_SERVER}" \
-    -extensions my_server \
+    -extensions server_cert \
     -rand_serial \
     -batch
 
@@ -52,3 +52,47 @@ openssl ca \
 openssl rsa \
     -in "${DIR_SERVER}/${DIR_PRIVATE}/${PRIVATE_KEY_SERVER}" \
     -out "${DIR_SERVER}/${DIR_PRIVATE}/${NO_PASS_PRIVATE_KEY}"
+
+
+
+
+
+
+
+
+
+
+>openssl pkcs12 -export -inkey server/private/ConcertoServer200507.nopass.key  -in server/cert/ConcertoServer200507.crt -out server/pkcs12/ConcertoServer200507.p12
+
+
+#最新ファイルを検索
+NEWEST_CERT_ROOT_CA=$(ls -1t "${DIR_ROOT_CA}/${DIR_CERT}" | sed -n 1P)
+NEWEST_CERT_INTER_CA=$(ls -1t "${DIR_INTER_CA}/${DIR_CERT}" | sed -n 1P)
+NEWEST_CERT_SERVER=$(ls -1t "${DIR_SERVER}/${DIR_CERT}" | sed -n 1P)
+#NEWEST_CERT_CLIENT=$(ls -1t "${DIR_CLIENT}/${DIR_CERT}" | sed -n 1P)
+
+#証明書集約
+cat "${DIR_ROOT_CA}/${DIR_CERT}/${NEWEST_CERT_ROOT_CA}" > \
+    "${DIR_SERVER}/${DIR_DIST}/${JOINED_CERT_FILE}"
+cat "${DIR_INTER_CA}/${DIR_CERT}/${NEWEST_CERT_INTER_CA}" >> \
+    "${DIR_SERVER}/${DIR_DIST}/${JOINED_CERT_FILE}"
+cat "${DIR_SERVER}/${DIR_CERT}/${NEWEST_CERT_SERVER}" >> \
+    "${DIR_SERVER}/${DIR_DIST}/${JOINED_CERT_FILE}"
+# cat "${DIR_SERVER}/${DIR_CERT}/${NEWEST_CERT_CLIENT}" >> \
+    # "${DIR_SERVER}/${DIR_DIST}/${JOINED_CERT_FILE}"
+
+#pkcs12ファイル生成
+openssl pkcs12 \
+    -in "${DIR_SERVER}/${DIR_DIST}/${JOINED_CERT_FILE}" \
+    -out "${DIR_SERVER}/${DIR_PKCS12}/${PKCS12_SERVER}" \
+    -inkey "${DIR_SERVER}/${DIR_PRIVATE}/${PRIVATE_KEY_SERVER}" \
+    -passin pass:"${PASS_PRIVATE_CLIENT}" \
+    -passout pass:"" \
+    -name "${PKCS12_NAME_SERVER}" \
+    -export
+
+
+
+
+
+

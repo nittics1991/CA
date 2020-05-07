@@ -44,11 +44,36 @@ openssl ca \
     -cert "${DIR_INTER_CA}/${DIR_CERT}/${NEWEST_CERT_INTER_CA}" \
     -days "${DAYS_CLIENT}" \
     -subj "${SUBJ_CLIENT}" \
-    -extensions my_client \
+    -extensions client_cert \
     -rand_serial \
     -batch
 
+
+#最新ファイルを検索
+NEWEST_CERT_ROOT_CA=$(ls -1t "${DIR_ROOT_CA}/${DIR_CERT}" | sed -n 1P)
+NEWEST_CERT_INTER_CA=$(ls -1t "${DIR_INTER_CA}/${DIR_CERT}" | sed -n 1P)
+#NEWEST_CERT_SERVER=$(ls -1t "${DIR_SERVER}/${DIR_CERT}" | sed -n 1P)
+NEWEST_CERT_CLIENT=$(ls -1t "${DIR_CLIENT}/${DIR_CERT}" | sed -n 1P)
+
+#証明書集約
+cat "${DIR_ROOT_CA}/${DIR_CERT}/${NEWEST_CERT_ROOT_CA}" > \
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+cat "${DIR_INTER_CA}/${DIR_CERT}/${NEWEST_CERT_INTER_CA}" >> \
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+#cat "${DIR_SERVER}/${DIR_CERT}/${NEWEST_CERT_SERVER}" >> \
+    #"${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+cat "${DIR_CLIENT}/${DIR_CERT}/${NEWEST_CERT_CLIENT}" >> \
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+
 #pkcs12ファイル生成
+openssl pkcs12 \
+    -in "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}" \
+    -out "${DIR_CLIENT}/${DIR_PKCS12}/${PKCS12_CLIENT}" \
+    -inkey "${DIR_CLIENT}/${DIR_PRIVATE}/${PRIVATE_KEY_CLIENT}" \
+    -passin pass:"${PASS_PRIVATE_CLIENT}" \
+    -passout pass:"" \
+    -name "${PKCS12_NAME_CLIENT}" \
+    -export
 
 
 

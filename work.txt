@@ -1,0 +1,5 @@
+
+server証明書用にp12ファイル作成bat
+
+iisから全部import可能か?
+

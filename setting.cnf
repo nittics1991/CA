@@ -9,43 +9,43 @@ DIR_CLIENT=client
 
 #----------------------------------------
 #RootCA
-CERT_ROOT_CA=RootCa$(date +%y%m%d).crt
-PRIVATE_KEY_ROOT_CA=RootCa$(date +%y%m%d).key
-CRL_ROOT_CA=RootCa$(date +%y%m%d).crl
-DAYS_ROOT_CA=$((365*10))
-SUBJ_ROOT_CA=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyRootCa$(date +%y%m%d)
-CRL_DAYS_ROOT_CA=$((365*10))
-PASS_PRIVATE_ROOT_CA=PassRootCa
+CERT_ROOT_CA=ConcertoRootCa$(date +%y%m%d).crt
+PRIVATE_KEY_ROOT_CA=ConcertoRootCa$(date +%y%m%d).key
+CRL_ROOT_CA=ConcertoRootCa$(date +%y%m%d).crl
+DAYS_ROOT_CA=$((365*20))
+SUBJ_ROOT_CA=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoRootCa$(date +%y%m%d)
+CRL_DAYS_ROOT_CA=$((365*20))
+PASS_PRIVATE_ROOT_CA=PassConcertoRootCa
 
 #InterCA
-CSR_INTER_CA=InterCa$(date +%y%m%d).csr
-CERT_INTER_CA=InterCa$(date +%y%m%d).crt
-PRIVATE_KEY_INTER_CA=InterCa$(date +%y%m%d).key
-CRL_INTER_CA=InterCa$(date +%y%m%d).crl
-DAYS_INTER_CA=$((365*10))
-SUBJ_INTER_CA=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyInterCa$(date +%y%m%d)
-CRL_DAYS_INTER_CA=$((365*10))
-PASS_PRIVATE_INTER_CA=PassInterCa
+CSR_INTER_CA=ConcertoInterCa$(date +%y%m%d).csr
+CERT_INTER_CA=ConcertoInterCa$(date +%y%m%d).crt
+PRIVATE_KEY_INTER_CA=ConcertoInterCa$(date +%y%m%d).key
+CRL_INTER_CA=ConcertoInterCa$(date +%y%m%d).crl
+DAYS_INTER_CA=$((365*20))
+SUBJ_INTER_CA=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoInterCa$(date +%y%m%d)
+CRL_DAYS_INTER_CA=$((365*20))
+PASS_PRIVATE_INTER_CA=PassConcertoInterCa
 
 #Server
-CSR_SERVER=Server$(date +%y%m%d).csr
-CERT_SERVER=Server$(date +%y%m%d).crt
-PRIVATE_KEY_SERVER=Server$(date +%y%m%d).key
-DAYS_SERVER=$((365*10))
-SUBJ_SERVER=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=www.MyCorp.ltd
-PASS_PRIVATE_SERVER=PassServer
-NO_PASS_PRIVATE_KEY=Server$(date +%y%m%d).nopass.key
+CSR_SERVER=ConcertoServer$(date +%y%m%d).csr
+CERT_SERVER=ConcertoServer$(date +%y%m%d).crt
+PRIVATE_KEY_SERVER=ConcertoServer$(date +%y%m%d).key
+DAYS_SERVER=$((365*20))
+SUBJ_SERVER=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=itcv1800005m.toshiba.local
+PASS_PRIVATE_SERVER=PassConcertoServer
+NO_PASS_PRIVATE_KEY=ConcertoServer$(date +%y%m%d).nopass.key
 
 #Client
-PKCS12_CLIENT=Client$(date +%y%m%d).p12
-CSR_CLIENT=Client$(date +%y%m%d).csr
-CERT_CLIENT=Client$(date +%y%m%d).crt
-PRIVATE_KEY_CLIENT=Client$(date +%y%m%d).key
-DAYS_CLIENT=$((365*1))
-SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Chuou/O=MyCorp.LTD/OU=IT/CN=MyClient$(date +%y%m%d)
-PASS_PRIVATE_CLIENT=PassClient
-PKCS12_NAME_CLIENT=MyClient$(date +%y%m%d)
-JOINED_CERT_FILE=Client$(date +%y%m%d).crt
+PKCS12_CLIENT=ConcertoClient$(date +%y%m%d).p12
+CSR_CLIENT=ConcertoClient$(date +%y%m%d).csr
+CERT_CLIENT=ConcertoClient$(date +%y%m%d).crt
+PRIVATE_KEY_CLIENT=ConcertoClient$(date +%y%m%d).key
+DAYS_CLIENT=$((365*1+30*2)) #毎年6月中に更新
+SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoClient$(date +%y%m%d)
+PASS_PRIVATE_CLIENT=PassConcertoClient
+PKCS12_NAME_CLIENT=ConcertoClient$(date +%y%m%d)
+JOINED_CERT_FILE=ConcertoClient$(date +%y%m%d).crt
 
 ########################################
 
