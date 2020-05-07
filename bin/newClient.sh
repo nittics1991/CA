@@ -57,23 +57,20 @@ NEWEST_CERT_CLIENT=$(ls -1t "${DIR_CLIENT}/${DIR_CERT}" | sed -n 1P)
 
 #証明書集約
 cat "${DIR_ROOT_CA}/${DIR_CERT}/${NEWEST_CERT_ROOT_CA}" > \
-    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_CLIENT}"
 cat "${DIR_INTER_CA}/${DIR_CERT}/${NEWEST_CERT_INTER_CA}" >> \
-    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_CLIENT}"
 #cat "${DIR_SERVER}/${DIR_CERT}/${NEWEST_CERT_SERVER}" >> \
-    #"${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+    #"${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_CLIENT}"
 cat "${DIR_CLIENT}/${DIR_CERT}/${NEWEST_CERT_CLIENT}" >> \
-    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}"
+    "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_CLIENT}"
 
 #pkcs12ファイル生成
 openssl pkcs12 \
-    -in "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_FILE}" \
+    -in "${DIR_CLIENT}/${DIR_DIST}/${JOINED_CERT_CLIENT}" \
     -out "${DIR_CLIENT}/${DIR_PKCS12}/${PKCS12_CLIENT}" \
     -inkey "${DIR_CLIENT}/${DIR_PRIVATE}/${PRIVATE_KEY_CLIENT}" \
     -passin pass:"${PASS_PRIVATE_CLIENT}" \
     -passout pass:"" \
     -name "${PKCS12_NAME_CLIENT}" \
     -export
-
-
-

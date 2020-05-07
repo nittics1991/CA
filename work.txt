@@ -1,5 +1,5 @@
 
-server証明書用にp12ファイル作成bat
+newServer.sh
+    パスフレーズserverの手入力が省略できない
 
-iisから全部import可能か?
 
