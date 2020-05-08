@@ -14,9 +14,9 @@ DIR_CLIENT=client
 CERT_ROOT_CA=ConcertoRootCa$(date +%y%m%d).crt
 PRIVATE_KEY_ROOT_CA=ConcertoRootCa$(date +%y%m%d).key
 CRL_ROOT_CA=ConcertoRootCa$(date +%y%m%d).crl
-DAYS_ROOT_CA=$((365*10))
+DAYS_ROOT_CA=$((365*20))
 SUBJ_ROOT_CA=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoRootCa$(date +%y%m%d)
-CRL_DAYS_ROOT_CA=$((365*10))
+CRL_DAYS_ROOT_CA=$((365*20))
 PASS_PRIVATE_ROOT_CA=PassConcertoRootCa
 
 #InterCA
@@ -24,9 +24,9 @@ CSR_INTER_CA=ConcertoInterCa$(date +%y%m%d).csr
 CERT_INTER_CA=ConcertoInterCa$(date +%y%m%d).crt
 PRIVATE_KEY_INTER_CA=ConcertoInterCa$(date +%y%m%d).key
 CRL_INTER_CA=ConcertoInterCa$(date +%y%m%d).crl
-DAYS_INTER_CA=$((365*10))
+DAYS_INTER_CA=$((365*20))
 SUBJ_INTER_CA=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoInterCa$(date +%y%m%d)
-CRL_DAYS_INTER_CA=$((365*10))
+CRL_DAYS_INTER_CA=$((365*20))
 PASS_PRIVATE_INTER_CA=PassConcertoInterCa
 
 #Server
@@ -34,10 +34,11 @@ PKCS12_SERVER=ConcertoServer$(date +%y%m%d).p12
 CSR_SERVER=ConcertoServer$(date +%y%m%d).csr
 CERT_SERVER=ConcertoServer$(date +%y%m%d).crt
 PRIVATE_KEY_SERVER=ConcertoServer$(date +%y%m%d).key
-DAYS_SERVER=$((365*10))
+DAYS_SERVER=$((365*20))
 
 #SUBJ_SERVER=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=itcv1800005m.toshiba.local
-SUBJ_SERVER=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=itcp1913571.toshiba.local
+#SUBJ_SERVER=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=itcp1913571.toshiba.local
+SUBJ_SERVER=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=localhost
 
 PASS_PRIVATE_SERVER=PassConcertoServer
 NO_PASS_PRIVATE_KEY=ConcertoServer$(date +%y%m%d).nopass.key
