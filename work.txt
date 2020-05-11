@@ -1,6 +1,56 @@
+////////////////////////////////
+Client証明書Server側
 
-newServer.sh
-    パスフレーズserverの手入力が省略できない
+コントロールパネル　管理ツール　コンピュータの管理　ローカルユーザとグループ　ユーザ　を開く
+新しいユーザでユーザを追加
+
+ユーザ名　iis_cert_user
+パスワード　ConcertoManager
+ユーザは次回ログオン時にパスワードの変更が必要 off
+パスワードを無期限にする on
+所属グループ　(ローカルPC)\Guests 追加
+
+プロジェクトのフォルダ以下全てに　追加したユーザへ　読み取り実行　権限追加
+
+
+Client証明書cerファイルをエディタで開く
+-----BEGIN CERTIFICATE----- と -----END CERTIFICATE-----　の間の文字列をコピー
+エディタに貼付け　改行\n を除去し　１行の文字列にする ==> cert文字列
+
+
+
+IISクライアント認証マッピング認証　を有効化
+
+
+
+IISマネージャでサイトを選択し　構成エディター　を開く
+system.webServer/security/authentication/iisClientCertificateMappingAuthentication を開く
+    
+enabled true
+oneToOneMappings　を開き、　追加　を実行
+
+certificate 準備した　cert文字列　を入力
+userName iis_cert_user
+password iis_cert_user の　パスワード
+
+oneToOneMappings を閉じ　適用　を実行
+
+IISマネージャでサイトを選択し　SSL設定　を開く
+クライアント証明書を　必要　選択
+
+IISマネージャでサイトを選択し　認証　を開く
+匿名認証　を　無効化
+
+サイトを再起動する
+
+
+////////////////////////////////
+Client認証Client側
+
+opensslで　Client証明書　を作成する
+p12ファイルをダブルクリックし　証明書を　個人　にインポートする
+
+ブラウザから　https　でアクセスする
 
 
 
@@ -8,7 +58,7 @@ newServer.sh
 Server証明書
 
 opensslで　Server証明書　を作成する際　CN を　サーバの　URI　にする
-p12ファイルをダブルクリックし　証明書をインポートする
+p12ファイルをダブルクリックし　証明書を　ローカルコンピュータ　にインポートする
 certml.msc　を開き　個人　ディレクトリから Server証明書 を　削除する
 
 IISマネージャで　サーバ共通設定をひらく
