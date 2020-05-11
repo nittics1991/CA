@@ -50,14 +50,8 @@ PKCS12_CLIENT=ConcertoClient$(date +%y%m%d).p12
 CSR_CLIENT=ConcertoClient$(date +%y%m%d).csr
 CERT_CLIENT=ConcertoClient$(date +%y%m%d).crt
 PRIVATE_KEY_CLIENT=ConcertoClient$(date +%y%m%d).key
-
-# DAYS_CLIENT=$((365*1+30*2)) #毎年6月中に更新
-# SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoClient$(date +%y%m%d)
-
-DAYS_CLIENT=$((1)) #毎年6月中に更新
-SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoClient$(date +%y%m%d)A
-
-
+DAYS_CLIENT=$((365*1+30*2)) #毎年6月中に更新
+SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Fuchu/O=ITC.CORP/OU=IT/CN=ConcertoClient$(date +%y%m%d)
 PASS_PRIVATE_CLIENT=PassConcertoClient
 PKCS12_NAME_CLIENT=ConcertoClient$(date +%y%m%d)
 JOINED_CERT_CLIENT=ConcertoClient$(date +%y%m%d).crt
