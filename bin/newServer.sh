@@ -51,6 +51,7 @@ openssl ca \
 #private key パスフレーズ除去ファイル生成
 openssl rsa \
     -in "${DIR_SERVER}/${DIR_PRIVATE}/${PRIVATE_KEY_SERVER}" \
+    -passin pass:"${PASS_PRIVATE_SERVER}" \
     -out "${DIR_SERVER}/${DIR_PRIVATE}/${NO_PASS_PRIVATE_KEY}"
 
 #最新ファイルを検索
