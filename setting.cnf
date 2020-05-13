@@ -1,0 +1,82 @@
+#!/bin/bash
+
+#RootCA,InterCA,Serverは1回のみ発行
+#サーバ証明書CNはサーバのFQDNに設定する
+#クライアント証明書は毎年更新(7/1を目途)
+
+########################################
+#   以下要設定
+########################################
+#DIR
+DIR_ROOT_CA=rootCA
+DIR_INTER_CA=interCA
+DIR_SERVER=server
+DIR_CLIENT=client
+
+#----------------------------------------
+#RootCA
+CERT_ROOT_CA=MyCaRootCa$(date +%y%m%d).crt
+PRIVATE_KEY_ROOT_CA=MyCaRootCa$(date +%y%m%d).key
+CRL_ROOT_CA=MyCaRootCa$(date +%y%m%d).crl
+DAYS_ROOT_CA=$((365*20))
+SUBJ_ROOT_CA=/C=JP/ST=Tokyo/L=Cyuou/O=ITC.CORP/OU=IT/CN=MyCaRootCa$(date +%y%m%d)
+CRL_DAYS_ROOT_CA=$((365*20))
+PASS_PRIVATE_ROOT_CA=PassMyCaRootCa
+
+#InterCA
+CSR_INTER_CA=MyCaInterCa$(date +%y%m%d).csr
+CERT_INTER_CA=MyCaInterCa$(date +%y%m%d).crt
+PRIVATE_KEY_INTER_CA=MyCaInterCa$(date +%y%m%d).key
+CRL_INTER_CA=MyCaInterCa$(date +%y%m%d).crl
+DAYS_INTER_CA=$((365*20))
+SUBJ_INTER_CA=/C=JP/ST=Tokyo/L=Cyuou/O=ITC.CORP/OU=IT/CN=MyCaInterCa$(date +%y%m%d)
+CRL_DAYS_INTER_CA=$((365*20))
+PASS_PRIVATE_INTER_CA=PassMyCaInterCa
+
+#Server
+PKCS12_SERVER=MyCaServer$(date +%y%m%d).p12
+CSR_SERVER=MyCaServer$(date +%y%m%d).csr
+CERT_SERVER=MyCaServer$(date +%y%m%d).crt
+PRIVATE_KEY_SERVER=MyCaServer$(date +%y%m%d).key
+DAYS_SERVER=$((365*20))
+
+#####サーバのドメインを指定
+SUBJ_SERVER=/C=JP/ST=Tokyo/L=Cyuou/O=ITC.CORP/OU=IT/CN=localhost
+
+PASS_PRIVATE_SERVER=PassMyCaServer
+NO_PASS_PRIVATE_KEY=MyCaServer$(date +%y%m%d).nopass.key
+PKCS12_NAME_SERVER=MyCaServer$(date +%y%m%d)
+JOINED_CERT_SERVER=MyCaServer$(date +%y%m%d).crt
+
+#Client
+PKCS12_CLIENT=MyCaClient$(date +%y%m%d).p12
+CSR_CLIENT=MyCaClient$(date +%y%m%d).csr
+CERT_CLIENT=MyCaClient$(date +%y%m%d).crt
+PRIVATE_KEY_CLIENT=MyCaClient$(date +%y%m%d).key
+
+#####毎年6月中に更新
+DAYS_CLIENT=$((365*1+30*2))
+
+SUBJ_CLIENT=/C=JP/ST=Tokyo/L=Cyuou/O=ITC.CORP/OU=IT/CN=MyCaClient$(date +%y%m%d)
+PASS_PRIVATE_CLIENT=PassMyCaClient
+PKCS12_NAME_CLIENT=MyCaClient$(date +%y%m%d)
+JOINED_CERT_CLIENT=MyCaClient$(date +%y%m%d).crt
+
+########################################
+#   以上
+########################################
+
+#sub dir
+DIR_CERT=cert
+DIR_CRL=crl
+DIR_CSR=csr
+DIR_PRIVATE=private
+DIR_NEWRCERT=newcerts
+DIR_DIST=dist
+DIR_PKCS12=pkcs12
+
+#sub dir for CA
+DIRS_CA="${DIR_CERT} ${DIR_CRL} ${DIR_CSR} ${DIR_PRIVATE} ${DIR_NEWRCERT}"
+
+#sub dir for user
+DIRS_USER="${DIR_CERT} ${DIR_CSR} ${DIR_PKCS12} ${DIR_PRIVATE} ${DIR_DIST}"
